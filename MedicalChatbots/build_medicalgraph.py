@@ -6,10 +6,13 @@ from py2neo import Graph, Node
 '''构建neo4j数据库'''
 class MedicalGraph:
     def __init__(self):
-        cur_dir = '/'.join(os.path.abspath(__file__).split('/')[:-1])  # 获取当前绝对路径的上层目录 linux中应用'/'split和join
-        self.data_path = os.path.join(cur_dir, 'data/medical.json')  # 获取json文件路径
+        # cur_dir = '/'.join(os.path.abspath(__file__).split('/')[:-1])  # 获取当前绝对路径的上层目录 linux中应用'/'split和join
+        # self.data_path = os.path.join(cur_dir, 'data/medical.json')  # 获取json文件路径
+        # 原代码修改为：
+        cur_dir = os.path.dirname(os.path.abspath(__file__))  # 自动处理路径分隔符
+        self.data_path = os.path.join(cur_dir, 'data', 'medicine.json')  # 分层拼接路径
         print(self.data_path)
-        self.g = Graph("http://0.0.0.0/:7474", auth=("neo4j", "neo4j"))# 修改信息
+        self.g = Graph("neo4j+s://1ffd6c56.databases.neo4j.io", auth=("neo4j", "BLp4KxW8NGX-AQYIB97ZewzWJwoolOzYSXEcSo3Wu4o"))# 修改信息
 
     '''读取文件'''
 
@@ -37,7 +40,7 @@ class MedicalGraph:
 
         count = 0
         # 构造疾病字典
-        for data in open(self.data_path):
+        for data in open(self.data_path, encoding='utf-8'):
             disease_dict = {}
             count += 1
             print(count)

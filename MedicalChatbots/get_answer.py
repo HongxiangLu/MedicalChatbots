@@ -2,7 +2,7 @@ from py2neo import Graph
 
 class Answer:
     def __init__(self):#调用数据库进行查询
-        self.g = Graph("http://0.0.0.0:7474", auth=("neo4j", "neo4j"))#输入自己修改的用户名，密码
+        self.g = Graph("neo4j+s://1ffd6c56.databases.neo4j.io", auth=("neo4j", "BLp4KxW8NGX-AQYIB97ZewzWJwoolOzYSXEcSo3Wu4o"))#输入自己修改的用户名，密码
         self.num_limit = 50#最多显示字符数量
 
     '''执行cypher查询，并返回相应结果'''
