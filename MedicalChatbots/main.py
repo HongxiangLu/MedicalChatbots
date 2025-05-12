@@ -1,13 +1,15 @@
 # coding=gbk
 from chat_robot import ChatRobot
 from keyword_template import KeyWordTemplate
-from flask import Flask
+from flask import Flask, render_template
 from flask_cors import CORS
 from flask import request
 import json
 
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='templates', static_folder='static')
+app.jinja_env.variable_start_string = '[['
+app.jinja_env.variable_end_string = ']]'
 CORS(app)# 设置跨域
 ans = '小康没能理解您的问题呢\n换个问题或者联系驻台医生吧'
 
@@ -47,7 +49,7 @@ def robot(question):
 
 # main启动函数
 if __name__ == '__main__':
-    app.run(host='localhost',port=5000,debug=True)
+    app.run(host='localhost',port=8888,debug=True)
 
 
 
